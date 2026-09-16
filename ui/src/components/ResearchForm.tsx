@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Building2, Factory, Globe, Loader2, Search } from 'lucide-react';
+import { Building2, Eye, EyeOff, Factory, Globe, KeyRound, Loader2, Search } from 'lucide-react';
 import LocationInput from './LocationInput';
 import ExamplePopup, { EXAMPLE_COMPANIES } from './ExamplePopup';
 import type { ExampleCompany } from './ExamplePopup';
@@ -9,6 +9,7 @@ interface FormData {
   companyUrl: string;
   companyHq: string;
   companyIndustry: string;
+  tavilyApiKey: string;
 }
 
 interface ResearchFormProps {
@@ -32,7 +33,9 @@ const ResearchForm = ({
     companyUrl: "",
     companyHq: "",
     companyIndustry: "",
+    tavilyApiKey: "",
   });
+  const [isTavilyKeyVisible, setIsTavilyKeyVisible] = useState(false);
   
   const [examplesOpen, setExamplesOpen] = useState(false);
   const [isExamplesClosing, setIsExamplesClosing] = useState(false);
@@ -133,12 +136,13 @@ const ResearchForm = ({
       // Add a slight delay to let animations complete
       setTimeout(() => {
         // Reset form fields to empty values
-        setFormData({
+        setFormData((previous) => ({
           companyName: "",
           companyUrl: "",
           companyHq: "",
           companyIndustry: "",
-        });
+          tavilyApiKey: previous.tavilyApiKey,
+        }));
         
         // Show the example suggestion again
         setShowExampleSuggestion(true);
@@ -160,7 +164,8 @@ const ResearchForm = ({
       companyName: example.name,
       companyUrl: example.url,
       companyHq: example.hq,
-      companyIndustry: example.industry
+      companyIndustry: example.industry,
+      tavilyApiKey: formData.tavilyApiKey,
     };
     cancelExamplesClose();
     setFormData(newFormData);
@@ -175,6 +180,33 @@ const ResearchForm = ({
       <div className={`${glassStyle.card} research-form`}>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-6">
+            <div className="tavily-key-field">
+              <label htmlFor="tavilyApiKey" className="field-label">
+                Tavily API Key <span className="text-gray-900/70">*</span>
+              </label>
+              <div className="relative">
+                <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 stroke-[#2677FF] z-10" strokeWidth={1.5} />
+                <input
+                  required
+                  id="tavilyApiKey"
+                  type={isTavilyKeyVisible ? 'text' : 'password'}
+                  autoComplete="off"
+                  value={formData.tavilyApiKey}
+                  onChange={(event) => setFormData((previous) => ({ ...previous, tavilyApiKey: event.target.value }))}
+                  className={`${glassStyle.input} tavily-key-input`}
+                  placeholder="Enter your Tavily API key"
+                />
+                <button
+                  type="button"
+                  className="tavily-key-visibility"
+                  onClick={() => setIsTavilyKeyVisible((visible) => !visible)}
+                  aria-label={isTavilyKeyVisible ? 'Hide Tavily API key' : 'Show Tavily API key'}
+                >
+                  {isTavilyKeyVisible ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+              <p className="tavily-key-help">Used only for this research session and never stored.</p>
+            </div>
             {/* Company Name */}
             <div className="relative group company-primary"
               ref={companyFieldRef}
@@ -305,7 +337,7 @@ const ResearchForm = ({
 
           <button
             type="submit"
-            disabled={isResearching || !formData.companyName.trim()}
+            disabled={isResearching || !formData.companyName.trim() || !formData.tavilyApiKey.trim()}
             className="research-submit"
           >
             <div className="flex items-center justify-center gap-2">

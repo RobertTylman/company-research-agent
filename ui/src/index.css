@@ -92,6 +92,12 @@
   .research-input:focus { outline: none; border-color: var(--color-primary-blue); background: var(--color-white); box-shadow: 0 0 0 3px #2677ff12; }
   .research-form .group > .relative > svg, .research-form .group > svg { width: 17px; height: 17px; stroke: var(--color-black-60); pointer-events: none; }
   .company-primary { position: relative; z-index: 30; }
+  .tavily-key-field { padding: 14px; border: 1px solid #2677ff24; border-radius: 14px; background: #2677ff08; }
+  .tavily-key-field .field-label { margin-bottom: 8px; }
+  .tavily-key-input { padding-right: 46px; background: #fffcf6b3; border-color: #2677ff1a; }
+  .tavily-key-visibility { position: absolute; top: 50%; right: 10px; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; color: var(--color-black-60); transform: translateY(-50%); }
+  .tavily-key-visibility:hover, .tavily-key-visibility:focus-visible { color: var(--color-black); background: var(--color-black-5); }
+  .tavily-key-help { margin: 8px 0 0; color: var(--color-black-60); font-size: 12px; }
   .company-primary > .field-label { font-size: 15px; font-weight: 600; }
   .company-name-input { min-height: 64px; font-size: 17px; background: #fffcf6b3; border-color: var(--color-black-10); }
   .company-subfields { position: relative; z-index: 0; isolation: isolate; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 22px; border-top: 1px solid var(--color-black-10); }
