@@ -67,11 +67,11 @@
   .site-nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 16px; min-height: 104px; }
   .brand-link { display: inline-flex; align-items: center; flex-shrink: 0; height: 52px; padding: 0 8px; margin-left: -8px; border-radius: 12px; transition: background 150ms, transform 150ms; }
   .brand-logo { display: block; height: 42px; width: auto; object-fit: contain; }
-  .brand-link:hover { background: var(--color-black-5); transform: translateY(-1px); }
+  .brand-link:hover, .brand-link:focus-visible { background: var(--color-black-5); transform: translateY(-1px); }
   .nav-actions { display: flex; align-items: center; }
   .nav-link { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; color: #000; transition: background 150ms, transform 150ms; }
   .github-logo { display: block; width: 30px; height: 30px; object-fit: contain; }
-  .nav-link:hover { color: #000; background: var(--color-black-5); transform: translateY(-1px); }
+  .nav-link:hover, .nav-link:focus-visible { color: #000; background: var(--color-black-5); transform: translateY(-1px); }
   .hero { max-width: 780px; margin: 0 auto; text-align: center; padding: 52px 0 28px; }
   .hero h1 {
     font-family: var(--font-suisse);
@@ -166,4 +166,11 @@
 
 @media (prefers-reduced-motion: reduce) {
   .research-submit:hover:not(:disabled), .research-submit:focus-visible:not(:disabled) { transform: none; }
+  .brand-link:hover, .brand-link:focus-visible, .nav-link:hover, .nav-link:focus-visible { transform: none; }
 }
+
+.demo-footer { display: flex; justify-content: flex-end; align-items: center; margin-top: 32px; padding: 12px 0; }
+
+.search-api-link { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; color: #8b887e; font-size: 10px; line-height: 1.5; white-space: nowrap; text-decoration: none; }
+.search-api-link:hover, .search-api-link:focus-visible { color: #2677ff; }
+.search-api-link:focus-visible { outline: 2px solid #2677ff; outline-offset: 4px; border-radius: 2px; }

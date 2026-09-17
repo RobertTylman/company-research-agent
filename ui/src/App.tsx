@@ -585,6 +585,11 @@ function App() {
             glassStyle={glassStyle.card}
           />
         )}
+        <footer className="demo-footer">
+          <a className="search-api-link" href="https://docs.tavily.com/documentation/api-reference/endpoint/search" target="_blank" rel="noopener noreferrer">
+            Search API docs <span aria-hidden="true">↗</span>
+          </a>
+        </footer>
       </div>
     </div>
   );
